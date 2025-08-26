@@ -31,7 +31,6 @@ class FlxSound extends FlxBasic
 	 * Only really matters if you are doing proximity/panning stuff.
 	 */
 	public var x:Float;
-	
 	/**
 	 * The y position of this sound in world coordinates.
 	 * Only really matters if you are doing proximity/panning stuff.
@@ -590,17 +589,21 @@ class FlxSound extends FlxBasic
 	 * Call after adjusting the volume to update the sound channel's settings.
 	 */
 	@:allow(flixel.sound.FlxSoundGroup)
-	function updateTransform():Void
-	{
-		_transform.volume = #if FLX_SOUND_SYSTEM (FlxG.sound.muted ? 0 : 1) * FlxG.sound.volume * #end
-			(group != null ? group.volume : 1) * _volume * _volumeAdjust;
-			
-		if (_channel != null) {
-    _transform.volume = _volume;
-    try {
-        _channel.soundTransform = _transform;
-    } catch (e:Dynamic) {
-        // ignore for Lime versions that handle this differently
+	@:allow(flixel.sound.FlxSoundGroup)
+    function updateTransform():Void
+    {
+       _transform.volume = #if FLX_SOUND_SYSTEM (FlxG.sound.muted ? 0 : 1) * FlxG.sound.volume * #end
+         (group != null ? group.volume : 1) * _volume * _volumeAdjust;
+        
+    if (_channel != null) {
+        _transform.volume = _volume;
+        try {
+            _channel.soundTransform = _transform;
+          } catch (e:Dynamic) {
+            // ignore for Lime versions that handle this differently
+        }
+    }
+}
 
 	
 	/**
