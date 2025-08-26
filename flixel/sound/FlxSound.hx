@@ -602,7 +602,6 @@ class FlxSound extends FlxBasic
     } catch (e:Dynamic) {
         // ignore for Lime versions that handle this differently
     }
-}
 
 	
 	/**
