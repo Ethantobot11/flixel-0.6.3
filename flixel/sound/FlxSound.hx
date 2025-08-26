@@ -601,7 +601,6 @@ class FlxSound extends FlxBasic
         _channel.soundTransform = _transform;
     } catch (e:Dynamic) {
         // ignore for Lime versions that handle this differently
-    }
 
 	
 	/**
